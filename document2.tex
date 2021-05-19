@@ -1,0 +1,470 @@
+\documentclass[a4paper,12pt]{article} % добавить leqno в [] для нумерации слева
+%%% Работа с русским языком
+
+
+\makeatother
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[cp1251]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+\usepackage{setspace,amsmath}
+\usepackage[left=20mm, top=15mm, right=15mm, bottom=35mm, nohead, footskip=10mm]{geometry} % настройки полей документа
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\graphicspath{{images/}{images2/}}  % папки с картинками
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков и таблиц текстом
+
+
+
+%%% Заголовок
+
+
+\begin{document} % конец преамбулы, начало документа
+
+	\begin{center}
+	Министерство науки и высшего образования Российской Федерации\\
+	НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ ЯДЕРНЫЙ УНИВЕРСИТЕТ «МИФИ»\\
+	\hfill \break
+	ИНСТИТУТ ЛАЗЕРНЫХ И ПЛАЗМЕННЫХ ТЕХНОЛОГИЙ\\
+	КАФЕДРА ЛАЗЕРНОЙ ФИЗИКИ\\
+	\hfill \break
+	\hfill \break
+	\hfill \break
+	\hfill \break
+	\hfill \break
+	\hfill \break
+	ОТЧЕТ ПО ПРОИЗВОДСТВЕННОЙ ПРАКТИКЕ\\
+		\hfill \break
+	\large{ИЗЛУЧЕНИЕ УЛЬТРАРЕЛЯТИВИСТСКИХ ЭЛЕКТРОНОВ}\\
+	\large{ПРИ ИОНИЗАЦИИ ТЯЖЕЛЫХ АТОМОВ В ЛАЗЕРНЫХ ПУЧКАХ}\\
+	\large{ЭКСТРЕМАЛЬНОЙ ИНТЕНСИВНОСТИ}
+	\end{center}
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+
+\begin{tabular}{cccccc}
+
+&Руководитель & практики & \underline{\hspace{3cm}} & д.ф.м.н., профессор & Попруженко С.В \\\\
+&Выполнил\;\;\;\;\;\,   && \underline{\hspace{3cm}} & студент гр.Б17-203 & Калымбетов Е.Б.\\\\
+
+\end{tabular}
+
+\hfill \break
+\hfill \break
+\begin{center} г.Москва \\2021 \end{center}
+\thispagestyle{empty} % выключаем отображение номера для этой страницы
+
+% КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+
+
+\newpage
+% Содержание
+\tableofcontents
+\newpage
+\section{Введение}
+
+\large
+
+В связи с тем,  что в настоящее время появились источники лазерного излучения, которые генерируют электромагнитные поля большой интенсивности, то задача об излучении заряженных частиц, классических или квантовых, с учетом радиационного трения или без его учета снова становятся актуальными.\\\\
+Хотя подобные задачи уже подробно рассматривались, большинство полученных в классических работах 60-х – 80-х годов прошлого века результатов относятся к наиболее простым и общим случаям плоской волны и электронного пучка, попадающего в область сильного электромагнитного поля извне. Такие идеализированные постановки зачастую оказываются неприменимыми, даже на качественном уровне, для описания взаимодействий в условиях реального эксперимента.\\
+Стоит привести значения интенсивности лазерного излучения, достигаемые современными лазерными установками.
+Согласно [2]:\\ %имеется ввиду Дипиаза%
+\begin{tabular}{cccc}
+ $7\times10^{21}$&Вт/см$^{2}$ &45-TW Ti:Sa laser\\
+\;\;\,$\sim10^{23}$&Вт/см$^{2}$ &Numerous Petawatt laser\\
+ \;\;\,$\sim10^{29}$&Вт/см$^{2}$ &extreme light infrastructure\\
+\end{tabular}\\\\
+Целый ряд результатов, которые были получены, нуждаются в пересмотре и более детальном анализе. В том числе это задача об излучении ультрарелятивистской частицы в поле плоской электромагнитной волны, либо в скрещенном поле. Последний случай является неплохим приближением поля лазерного излучения.\\\\
+В чем заключется важное уточнение, которое до нас , вероятно, никто не делал? Во всех предыдущих работах рассматривалось излучение частицы, которая откуда-то прилетает, попадая в лазерный фокус. Это явление столкновения частиц с электромагнитной волной, хорошо описанное в статье [11]. Когда интенсивность лазерного пучка становится очень большой, то в этом столкновении трудно достичь того, чтобы заряженные частицы проникли в самый центр этого пучка. Их выталкивает передним фронтом падающей волны. Поэтому целесообразно рассмотреть ситуацию ,когда частицы появляются в центре излучения. А это происходит, например, в случае, когда многоэлектронные атомы подвергаются сильному излучению, которое ведет к туннельной ионизации электронов.\\\\
+В долгосрочной перспективе подготовки дипломной работы бакалавра наша цель заключается в том,чтобы теоретически исследовать движение  излучение заряженных частиц (электронов), рожденных в лазерном фокусе высокой пиковой интенсивности за счет ионизации. Планируемое исследование включает следующие этапы:
+\begin{itemize}
+	\item Вычисление траектории электрона, отвечающей ионизационному начальному условию.\\
+	\item Расчет спектрально-углового распределения излучения с такой траектории для случая, когда лазерное излучение описывается в приближении плоской волны.
+	Исследование случаев различных поляризаций лазерного излучения.\\
+	\item Учет влияния пространственной фокусировки лазерного пучка. \\
+	\item Исследование влияния эффектов радиационного трения на спектрально-угловые распределения излучения. \\
+\end{itemize}
+
+%{\color{red} С.П.: Введение потом поправим}
+
+
+\section{Постановка задачи и обозначения}
+%Задача отчетного этапа (весенний семестр 2019-20 у.г.) заключалась в том, %чтобы\\
+%(а) изучить теорию нелинейного томсоновского рассеяния в поле плоской %электромагнитной волны, изложенную в работе \cite{sarachik-prd70} (Раздел %3);\\
+%(b) найти траекторию электрона в поле плоской электромагнитной волны, %отвечающую начальному условию туннельной ионизации %\cite{popov-usp04,ciappina-pra19} (Раздел 4.1);\\
+%(c) получить общие выражения для спектрально-углового распределения %нелинейного томсоновского излучения в сильном электромагнитном поле для %такой траектории и проанализировать возможность его аналитического расчета %в пределе сильных лазерных полей (Раздел 4.2).
+
+Задача отчетного этапа (осенний семестр 2019-20 у.г) заключалась в том, чтобы\\
+(a) изучить движение электрона в поле фокусированного лазерного пучка.\\
+(b) найти упрощенные методы вычисления спектрального, углового, спектрально-углового распределения излучения электрона
+
+В тексте используются следующие обозначения: $e$ -- элементарный заряд, $m$ -- масса электрона, $\bf E$ и $\bf H$ -- электрическое и магнитное поля лазерной волны, ${\bf A}$ -- векторный потенциал.
+В случае, когда рассматривается плоская монохроматическая волна, $\omega$ и $\lambda=2\pi c/\omega$ -- ее частота и длина, $c$ -- скорость света.
+В формулах часто возникает безразмерный параметр
+
+\begin{equation}
+a_0=\frac{eE_0}{m\omega c}~,
+\label{a0}
+\end{equation}
+задающий меру интенсивности лазерной волны.
+В расчетах мы всюду считаем, что лазерное излучение создается источником с $\lambda\approx 1\mu{\rm m}=10^{-4}$см, что соответствует большинству мощных лазеров \cite{XCELS,apollon,CAEP,SULF,ELI}.
+При такой длине волны $a_0\approx 10^2$ для $I=10^{22}$Вт/см$^2$ и $a_0\approx 10^3$ для $I=10^{24}$Вт/см$^2$.
+
+
+
+%Будем рассматривать электрон, который вырывается из вещества однородным скрещенным электромагнитным полем. Начальную скорость выбираем нулевой.
+%(Для определенности положим $E_0=$,стоит ли указать значения $E_0$??). Согласно Л-Л движение во взаимно перпендикулярных, но не равных, полях может быть сведено к движению в чисто магнитном или чисто электрическом поле. Естественно, мы такая конфигурация ничего общего с плоской волной не имеет.
+%\begin{wrapfigure}{l}{0.34\linewidth} \label{risunok}
+%\includegraphics[scale=0.5]{postanovka}
+%\end{wrapfigure}
+%\\Оси и вектора поля направим, как показано на рисунке, то есть
+%$\mathbf{E}=(0, -E_0, 0)$, $\mathbf{H}=(E_0, 0, 0)$.\\\\ \\
+%В разделе 3.2 мы определим траекторию электрона.
+%В разделе 4 обсудим спектрально-угловое распределение излучения.\\\\
+%\\ \\ \\ \\ \\
+\section{Общие формулы}
+
+Уравнение движения
+\begin{equation} \label{eq:lorfor}
+ \frac{d\mathbf{p}}{dt} =
+ e\mathbf{E} + \frac{e}{c} [\mathbf{v} \times \mathbf{H}]
+\end{equation}\\
+Интенсивность (мощность) излучения быстро движущегося заряда
+\begin{equation} \label{eq:fullintens}
+P=-\frac{2 e^2 c}{3} \frac{du^\mu}{ds} \frac{du_\mu}{ds}~,
+\end{equation}\\
+где $U^\mu$ - 4х-вектор скорости, $ds=cdt\sqrt{1-v^2/c^2}$ -- интервал.\\
+Формулы для спектрально-углового распределения энергии излучения на далеких расстояниях.\\
+1) В случае периодического движения электрон излучает гармоники лазерной частоты $\omega_m=m\omega$
+\begin{equation} \label{eq:specper}
+	\frac{dP^m}{d\Omega} =
+	\frac{c}{2\pi} |\mathbf{E}_m|^2 R_0^2
+\end{equation}
+
+\begin{equation}  \label{eq:naprper}
+	\mathbf{E}_m=\frac{i\omega}{c} [\mathbf{n} \times
+						 [\mathbf{A}_{\omega} \times \mathbf{n} ] ]
+\end{equation}
+
+\begin{equation} \label{eq:volnvecper}
+	\mathbf{A}_\omega = \frac {e^{ikR_0}} {cR_0}
+	\int e \mathbf{v} (t) exp
+	\left\{
+		i [\omega t - \mathbf{k} \cdot \mathbf{r} (t)]
+	\right\}
+	dt
+\end{equation}
+
+Здесь $R_0$ -- расстояние от излучающей частицы до точки наблюдения, которое выпадает из конечных формул, ${\bf k}$ -- волновой вектор испускаемого излучения,
+$\mathbf{n}$ -- единичный вектор в направлении излучения.
+
+%\begin{equation}
+%	\omega = m \omega_0
+%\end{equation}\\
+2) Если движение не периодично, излучается непрерывный спектр.
+Именно этот случай представляет интерес для дальнейших расчетов.
+При этом предыдущие формулы несколько видоизменяются, в частности, вместо дифференциальной мощности излучения вводится спектрально-угловое распределение полной излученной энергии
+\begin{equation} \label{eq:specaper}
+	d\varepsilon_{\mathbf{n} {\widetilde \omega}} =
+	\frac{c}{4\pi^2} |\mathbf{E}_{\widetilde \omega}|^2 	R_0^2
+	d \widetilde \omega 	d\Omega
+\end{equation}
+
+\begin{equation}  \label{eq:napr}
+\mathbf{E}_{\widetilde \omega}=\frac{i\widetilde \omega}{c} [\mathbf{n} \times
+[\mathbf{A}_{\widetilde \omega} \times \mathbf{n} ] ]
+\end{equation}
+
+\begin{equation} \label{eq:volnvec}
+\mathbf{A}_{\widetilde \omega} = \frac {e^{i \widetilde kR_0}} {cR_0}
+\int e \mathbf{v} (t) exp
+\left\{
+i [\widetilde \omega t -  \mathbf{k}_{\widetilde \omega} \cdot \mathbf{r} (t)]
+\right\}
+dt,
+\end{equation}
+где $\widetilde \omega$ -- частота в непрерывном спектре излучения.\\
+Вместо формул \eqref{eq:napr} и \eqref{eq:volnvec} в некоторых случаях иногда разумнеее использовать другой подход. Согласно  \cite{dau-2}
+\begin{equation} \label{eq:napr_by_acceleration}
+	\mathbf{E}(t, \mathbf{n}) = \frac{e}{c^2 R_0}
+	\frac {
+	[ \mathbf{n} \times
+				[ \mathbf{n} - \frac{\mathbf{v}} {c}
+				,
+				\mathbf{w}]
+	]     } {
+	( 1 - \frac {\mathbf{n} \mathbf{v}} {c} ) ^3
+			}
+\end{equation}
+
+\begin{equation} \label{eq:H_and_E}
+	\mathbf{H} (t, \mathbf{n}) = [ \mathbf{n} , \mathbf{E} ]
+\end{equation}
+
+\begin{equation} \label{eq:H_Furie}
+	\mathbf{H}_{\widetilde \omega} = \int dt \cdot e^{i \widetilde \omega t}
+									\mathbf{H} (t, \mathbf{n}),
+\end{equation}
+где $\mathbf{w}=\frac{d\mathbf{v}} {dt} $ -- ускорение электрона.
+%Описав излучение в R-системе, можно обратно перейти с помощью преобразований Лоренца к L-системе и получить результаты, которые можно наблюдать экспериментально.\\\\
+%Важно понимать что незначительное изменение постановки задачи может в большой мере повлиять на результаты расчетов. В частности дискретный спектр излучения переходит в непрерывный. Кроме того, оперировать таким понятием, как система среднего покоя электрона, становится невозможным. Мы продемонстрируем это в следующем подразделе\\\\
+%Статья E.S.Sarachik и G.T.Schappert является поучительной в том смысле, что мы попытемся проделать тот же путь для другим постановок задачи.\\\\
+
+\section{Движение и излучение в скрещенном поле}
+Будем решать уравнение движения \eqref{eq:lorfor}. Эта задача решена в
+\textsection49 \cite{dau-2} в общем случае, однако мы приведем другое решение с учетом постановки задачи.\\
+Раскладываем векторное уравнение на три компоненты.
+\[
+\left\{
+\begin{aligned}
+&\frac{dp_x}{dt}=0  \\
+&\frac{dp_y}{dt}=-eE_0
+\left(
+1-\frac{v_z}{c}
+\right)\\
+&\frac{dp_z}{dt}=-(e/c)E_0v_y\\
+\end{aligned}
+\right.
+\]\\
+Делаем замену $\varphi=t-v_z/c$.
+Далее везде под начальным условием будем понимать условие в $\varphi=\varphi_0$.\\
+Из первого уравнения следует $p_x=const$, а поскольку $\mathbf{p}(\varphi_0)=0$, то $p_x=0$.\\
+Заметим, что \[
+\frac{d}{dt}=
+\frac{d}{d\varphi} \cdot
+\frac	{d \varphi}
+{d t} =
+\frac{d}{d\varphi}
+\left( 1- \frac{v_z}{c} \right)
+\]Так что система перепишется следующим образом
+\begin{equation} \label{eq:move}
+\left\{
+\begin{aligned}
+&p_x=const  \\
+&\frac{dp_y}{d\varphi}
+\left( 1- \frac{v_z}{c} \right)=-eE_0
+\left( 1- \frac{v_z}{c} \right)\\
+&\frac{dp_z}{d\varphi}
+\left( 1- \frac{v_z}{c} \right)=-(e/c)E_0v_y \\
+\end{aligned}
+\right.
+\end{equation}
+Учитывая, что $v_z \neq c$ и $p_y(\varphi_0)=0$ получаем
+$p_y=eE_0(\varphi-\varphi_0)$.\\
+Дифференцируем по времени выражение для полной энергии
+\[
+	\varepsilon=\sqrt{m^2c^4+p^2c^2}
+\]
+\[
+	\frac{d\varepsilon}{dt}=
+	\frac{c^2 \mathbf{p} } {\varepsilon} \cdot
+	\frac{d\mathbf{p}}{dt} =
+	\mathbf{v} \cdot \frac {d\mathbf{p}}{dt} =
+	e \mathbf{v} \cdot \mathbf{E}=
+	e v_y E_0 =
+	c \frac {dp_z}{dt}
+\]
+Так что $d(\varepsilon-cp_z)=0$ и $\varepsilon=const+cp_z $\label{eq:energy}. Обозначим const  через $p_-c$. Из начальных условий следует, что $p_-c=mc^2$.
+\begin{equation} \label{eq:gamma}
+	1-\frac{v_z}{c} =
+	1-\frac{cp_z}{\varepsilon} =
+	\frac{p_-}{p_z+p_-}
+\end{equation}
+Подставляю \eqref{eq:gamma} в \eqref{eq:move} и нахожу $p_z=\frac{(eE_0)^2}{2mc} (\varphi-\varphi_0)^2$.\\
+Уравнения для координат легко проинтегрировать по переменной $\varphi$
+\begin{equation}
+\left\{
+\begin{aligned}
+	&\frac{dx}{dt} = \frac{dx}{d\varphi}
+		\left(1-\frac{v_z}{c}\right) = v_x \\
+	&\frac{dy}{d\varphi}
+		\left(1-\frac{v_z}{c}\right) = v_y\\
+	&\frac{dz}{d\varphi}
+	\left(1-\frac{v_z}{c}\right) = v_z\\
+\end{aligned}
+\right.
+\end{equation}
+\\Получаем ответ к задаче
+\begin{equation}
+\left\{
+\begin{aligned}
+x&= x_0
+	&p_x&=0 \\
+y&=y_0-\frac{eE_0}{2m}(\varphi-\varphi_0)^2
+	&p_y&=eE_0(\varphi-\varphi_0)	 \\
+z&=z_0+\frac{(eE_0)^2}{6m^2c} (\varphi-\varphi_0)^3
+	&p_z&=\frac{(eE_0)^2}{2mc} (\varphi-\varphi_0)^2\\
+\varphi&=t-z/c
+\end{aligned}
+\right.
+\end{equation}
+Для того чтобы облегчить дальнейшие вычисления, мы положим $\varphi_0=0$ и занулим начальные координаты. Кроме того, из соображений соответствия задачи плоской волны круговой поляризации и задачи скрещенного поля, сделаем замену $\varphi'=\omega \varphi$, где $\omega$ это частота падающей плокой волны. %Для характеристики силы поля обозначим $a_0=(eE_0/m\omega c)$.
+%Можно показать, что для рассматриваемых полей $a_0 \gg 1$.
+Тогда система перепишется как
+\begin{equation} \label {eq:system}
+\left\{
+\begin{aligned}
+x&= 0
+&p_x&=0 \\
+y&=- \frac {\lambda} {2\pi} \frac {a_0} {2} \varphi^2
+&p_y&=a_0 mc\varphi	 \\
+z&=\frac {\lambda} {2\pi} \frac {a_0^2} {6} \varphi^3
+&p_z&=\frac{a_0^2}{2} mc \varphi^2\\
+\varphi&=\omega t-(\omega/c)z
+\end{aligned}
+\right.
+\end{equation}
+
+
+
+\section{Движение в поле Гауссова пучка}
+Примем, что поле описывается формулой
+
+\begin{equation} \label{eq:Gaussian_field}
+ \mathbf{E} = \mathbf{E_0} exp(i \omega t + i k z)
+ 			exp \left\{ - \frac{\rho^2} {w(z)^2} - \frac{ik\rho^2} {2R(z)} + i\Psi(z)
+ 			\right\}
+ 			\left(1 + \frac{z^2} {z_R^2} \right) ^{-\frac{1}{2}}
+\end{equation}
+или
+\begin{equation} \label{eq:Gaussian_f}
+	 \mathbf{E} =  \mathbf{E_0} \cdot f(t,z,\rho),
+\end{equation}
+где $\rho = \sqrt{x^2+y^2}$, $w(z)=w_0 \sqrt{1 + \frac{z^2} {z_R^2} }$, $w0 = 2\lambda$ ,
+$z_R = \frac{\pi w_0^2}  {\lambda} $, $R(z) = z(1 + \frac{z_R^2} {z^2})$,
+$\Psi(z) = arctan( \frac{z} {z_R} )$
+
+\begin{equation} \label{eq:HH_EE}
+	\mathbf{H} = [ \mathbf{e_z} , \mathbf{E} ]
+\end{equation}
+Мы можем легко получить численное решение \eqref{eq:lorfor} для такой конфигурации. Электрон разгоняется до ультрарелятивистских скоростей, приобретая ускорение и излучая. Затем он выходит из фокуса пучка и перестает излучать, двигаясь равномерно.\\
+Оказывается, что на начальном участке движения траектория в скрещенном поле блика к траекории в поле Гауссова пучка. Можно ли использовать первую траекторию для расчетов излучения? Чтобы ответить на этот вопрос мы провели следующий анализ:\\
+Для движения в поле Гауссова пучка из \eqref{eq:fullintens} получаем:
+\begin{equation} \label{eq:Gausse_full_int}
+	I(t, z , \rho) = \frac{a_0^2  \omega^2} {c} \cdot f(t,z,\rho)^2
+\end{equation}
+В этой зависимости в $f(t,z,\rho)$ аргументом можно брать две траектории, даже если траектория в скрещенном поле даст не физичный результат.
+Представим графики завимости нормированной интенсивности от фазы и безрамерной траектории при разных начальных координатах.
+\\ \\
+%\includegraphics[scale=0.475]{int}
+%\includegraphics[scale=0.475]{X}
+%\end{wrapfigure}
+%\begin{wrapfigure}{l}{0.0\textwidth} \label{tracepic}
+%\includegraphics[scale=0.475]{int-12}
+%\includegraphics[scale=0.475]{X-12}
+%\end{wrapfigure}
+%\\
+\includegraphics[scale=0.525]{fullint}
+\includegraphics[scale=0.525]{traces}
+Стоит заметить, что не всегда наблюдается совпадение графиков интенсивности(красного и синего). Это преимущественно происходит, когда электрон стартует с отрицательной координаты, ускоряясь под действием электрического поля к центру пучка. Но такие электроны, излучают слабо в отличие от близких к центру фокуса. Пока не вдаваясь в такие подробности, примем, что графики интенсивности  практически совпадают.\\
+Такое совпадение дает основания на начальном участке движения использовать в формулах траекторию электрона в скрещенном поле. Однако, выражение \eqref{eq:volnvec} предполагает интегрирование вдоль всей траектории и при непосредственном подставлении \eqref{eq:system} даст некорректные значения. Это связано с тем, что \eqref{eq:volnvec} не содержит в явном виде ускорение электрона, которое и отвечает за излучение. Поэтому формулы \eqref{eq:napr_by_acceleration},
+\eqref{eq:H_and_E}, \eqref{eq:H_Furie} более пригодны для расчета.
+
+\section{Кривизна траектории}
+Из \eqref{eq:system} следует, что электрон становится ултьтрарелятивистским при
+$\varphi_0 \sim \frac{1}{a_0}$. То есть гораздо раньше, чем он вылетает из фокуса, теряя ускрение, а именно при $\varphi^* \sim \frac{2\div3} {\sqrt{a_0}} $. Следовательно, согласно \cite{dau-2} значительне время электрон будет излучать в узкий конус с углом раствора
+\begin{equation} \label{eq:konus}
+	\Delta \Theta = \frac {mc^2} {\varepsilon}  =
+	\frac {1} { \sqrt{1+ a_0^2 \varphi^2 + \frac{1}{4} a_0^4 \varphi^4 }}
+\end{equation}
+Визуально поведение электрона можно представить на фазовой оси.\\
+\includegraphics[scale=0.475]{fi}
+\\
+Нам необходимо сравнить угол раствора конуса излучения с углом поворота траектории. Обозначим его через $\chi$. Если окажется, что выполняется одно из двух неравенств, а именно $\chi \ll \Delta \Theta$ или $\chi \gg \Delta \Theta$, то мы сможем использовать некоторые упрощения, согласно \cite{dau-2}. Итак
+\begin{equation} \label{eq:chi}
+	\tg(\chi) |_\varphi* = \frac{dx}{dz} |_{\varphi^*} = \frac{2} {a_0 \varphi^*} =
+	\frac{1}{ \sqrt{a_0} } \\
+\end{equation}
+\begin{equation}
+	\chi (\varphi^*) \approx 0.1
+\end{equation}
+Подставав известное  $\varphi^*$ в \eqref{eq:konus}, получим
+\begin{equation}
+\Delta \Theta (\varphi^*) \approx 3 \times 10^{-3}
+\end{equation}
+Таким образом, раствор конуса излучения гораздо уже, чем угол поворота траектории. Следовательно, можно выделить такой диапазон $\varphi$, что в данном направлении излучение поступает с малого участка траектории, который является почти прямым. Похожий случай излучения с такими же условиями на $\Delta \Theta$ и $\chi$ рассморен в \cite{dau-2} ($\S$74. Магнитно-тормозное излучение) с конфигурацией поля -- постоянное магнитное. В этом поле электрон периодически движется по окружности постоянного радиуса и излучает в дискретном спектре, причем величина излучения напрямую определяется радиусом окружности. \\
+Наша задача заключается в том, чтобы определить радиус кривизны траектории электрона в каждый момент времени и излучение в соотвествующее этому моменту направление.
+
+\section{Спектрально-угловое распределение}
+Расчеты спектрально-углового распределения основаны на выводах предыдущего пункта и формулы (74.9) \cite{dau-2}. Графики приведены в логарифмическом масштабе.
+\begin{wrapfigure}{l}{0.0000001\textwidth} %this figure will be at the right
+	\includegraphics[scale=0.580]{3dscr}
+	\includegraphics[scale=0.580]{3dg}
+\end{wrapfigure}
+\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
+\includegraphics[scale=0.580]{3dr}\\
+Графики подтверждают, что приближение скрещенного поля может быть использовано в дальнейшем для расчета излучения электрона.
+\section{Выводы и план дальнейшей работы}
+Упрощение расчета спектрально-углового распределения в поле Гауссова пучка осуществимо в двух этапах:\\
+1) Описание движения в скрещенном поле\\
+2) Использование синхротронности излучения\\ \\ \\
+В дальнейшем планируется:\\
+a) Рассмотреть спектрально-угловое распределние с различными параметрами пучка.\\
+b) Использовать более точные приближеня, кроме синхротронного излучения.\\
+с) Включить в описание движения и излучения эффект радиационного трения.
+\newpage
+\begin{thebibliography}{9}
+
+	\bibitem{bulanov-rmp09} G. Mourou, T. Tajima and S.V. Bulanov, ``Optics in the relativistic regime,'' Rev. Mod. Phys. {\bf 78}, 309 (2009).
+
+	\bibitem{dipiazza-rmp12} A. Di Piazza, C. M\"{u}ller, C.Z. Hatsagortsyan and C.H. Keitel, ``Extremely high-intensity laser interactions with fundamental quantum systems,'' Rev. Mod. Phys. {\bf 84}, 1177 (2012).
+
+	\bibitem{fedotov-cp15} N.B. Narozhny and A.M. Fedotov, ``Extreme light physics,'' Cont. Phys. {\bf 56}, 249 (2015).
+
+	\bibitem{XCELS} A.V. Bashinov, A.A. Gonoskov, A.V. Kim, G. Mourou and A.M. Sergeev, ``New horizons for extreme light physics with mega-science project XCELS,'' Eur. Phys. J.  Spec. Top. {\bf 223}, 1105 (2014).
+
+	\bibitem{apollon} D. Papadopoulos et al.,, ``The Apollon 10 PW laser: experimental and theoretical investigation of the temporal characteristics,'' High Pow. Las. Sci. Eng. {\bf 4} E34 (2016).
+
+	\bibitem{CAEP} X. Zeng et al., ``Multi-petawatt laser facility fully based on optical parametric chirped-pulse amplification,'' Opt. Lett. {\bf 42}, 2014 (2017).
+
+	\bibitem{SULF} W. Li et al., ``339 J high-energy Ti:sapphire chirped-pulse amplifier for 10??PW laser facility,'' Opt. Lett. {\bf 43}, 5681 (2018).
+
+	\bibitem{ELI} J-P. Chambaret et al., 2010 ``Extreme light infrastructure: laser architecture and major challenges,'' in ``Solid State Lasers and Amplifiers IV, and High-Power Lasers'' {\bf 7721} 77211D
+
+	\bibitem{P3-ELI} S. Weber et al., ``P3: An installation for high-energy density plasma physics and ultra-high intensity laser–matter interaction at ELI-Beamlines,'' Mat. Radiat. Extr. {\bf 2}, 149 (2017).
+
+
+
+	\bibitem{dau-2} Л.Д. Ландау, Е.М. Лифшиц. Теоретическая физика. Том II. Теория поля. М.: Наука, 1988.
+
+	\bibitem{sarachik-prd70} E.S. Sarachik and G. T. Schappert, ``Classical theory of the scattering of intense laser radiation by free electrons,'' Phys. Rev. D {\bf 1}, 2738 (1970).
+
+	\bibitem{popov-usp04} V.S. Popov, ``Tunnel and multiphoton ionization of atoms and ions in a strong laser field (Keldysh theory),'' Usp. Fiz. Nauk {\bf 147} 921 (2004) [Phys. Usp. {\bf 47}, 855 (Engl. transl.) (2004)].
+
+	\bibitem{ciappina-pra19} M. F. Ciappina, S. V. Popruzhenko, S. V. Bulanov, T. Ditmire, G. Korn, and S. Weber, ``Progress toward atomic diagnostics of ultrahigh laser intensities,'' Phys. Rev. A {\bf 99}, 043405 (2019).
+
+
+
+\end{thebibliography}
+
+
+
+
+\end{document}
